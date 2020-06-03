@@ -1,24 +1,40 @@
-import withApollo from '../lib/with-apollo'
-import Link from 'next/link'
-import { useViewerQuery } from '../lib/viewer.graphql'
+import dynamic from 'next/dynamic'
+import { Container, Typography, Box, Grid } from '@material-ui/core'
+
+import Nav from '../components/Nav'
+import TactileSection from '../components/TactileSection'
+
+const PlotDisplay = dynamic(import('../components/PlotDisplay'), {
+    ssr: false
+})
+
 
 const Index = () => {
-  const { data } = useViewerQuery()
-
-  if (data) {
-    const { viewer } = data
     return (
-      <div>
-        You're signed in as {viewer.name} and you're {viewer.status} goto{' '}
-        <Link href="/about">
-          <a>static</a>
-        </Link>{' '}
-        page.
-      </div>
+        <div>
+            <Container>
+                <Box my={4}>
+                    <Grid
+                        container
+                        justify="center"
+                        direction="column"
+                        alignItems="center"
+                        spacing={5}
+                    >
+                        <Grid item>
+                            <Nav/>
+                        </Grid>
+                        <Grid item>
+                            <PlotDisplay/>
+                        </Grid>
+                        <Grid item>
+                            <TactileSection/>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Container>
+        </div>
     )
-  }
-
-  return <div>...</div>
 }
 
-export default withApollo(Index)
+export default Index
