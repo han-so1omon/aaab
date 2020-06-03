@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { Container, Typography, Box, Grid } from '@material-ui/core'
+import { Container, Box, Grid } from '@material-ui/core'
 
 import Nav from '../components/Nav'
 import TactileSection from '../components/TactileSection'
