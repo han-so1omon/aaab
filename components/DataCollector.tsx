@@ -15,7 +15,14 @@ const DataCollector = () => {
     } = useContext(AppStateContext)
 
     async function fetchValidationData(id: string) {
-        const resp = await fetch(process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL + '/api/validate', {
+        let url
+        if (process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL) {
+            url = process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL + '/api/validate'
+        } else {
+            url = '/api/validate'
+        }
+
+        const resp = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,7 +30,7 @@ const DataCollector = () => {
             body: JSON.stringify({ id: id, thresh: 0.2 })
         })
         const jResp = await resp.json()
-        
+
         dispatch({
             type: 'SET_TEST_STATUS',
             payload: {

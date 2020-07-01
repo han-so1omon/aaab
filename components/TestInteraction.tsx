@@ -72,7 +72,13 @@ const TestInteraction = () => {
                 6.31, 2.58, 0.07, 5.76, 3.50]
         }
         */
-        const resp = await fetch(process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL + '/api/test', {
+        let url
+        if (process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL) {
+            url = process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL + '/api/test'
+        } else {
+            url = '/api/test'
+        }
+        const resp = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
