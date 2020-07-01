@@ -1,0 +1,16 @@
+type Dataset {
+  name: String!
+  data: [Float!]
+}
+
+type Test {
+  a: Dataset!
+  b: Dataset!
+  aEcdf: Dataset
+  bEcdf: Dataset
+  d: Float
+  thresh: Float
+  same: Boolean
+}
+
+

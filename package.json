@@ -1,12 +1,11 @@
 {
-  "name": "with-typescript-graphql",
+  "name": "aaab",
   "version": "0.1.0",
   "author": "",
   "license": "ISC",
   "scripts": {
-    "codegen": "graphql-let",
-    "dev": "yarn codegen && next --hostname=0.0.0.0",
-    "build": "yarn codegen && next build",
+    "dev": "next --hostname=0.0.0.0 --port=3001",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
@@ -27,10 +26,12 @@
     "graphql-tag": "^2.10.3",
     "next": "latest",
     "plotly.js": "^1.54.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-plotly.js": "^2.4.0",
-    "sass": "^1.26.7"
+    "sass": "^1.26.7",
+    "simple-statistics": "^7.1.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.13.3",

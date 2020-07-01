@@ -1,39 +1,28 @@
-import dynamic from 'next/dynamic'
-import { Container, Box, Grid } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid'
 
 import Nav from '../components/Nav'
-import TactileSection from '../components/TactileSection'
-
-const PlotDisplay = dynamic(import('../components/PlotDisplay'), {
-    ssr: false
-})
-
+import DataPusher from '../components/DataPusher'
+import DataCollector from '../components/DataCollector'
 
 const Index = () => {
     return (
-        <div>
-            <Container>
-                <Box my={4}>
-                    <Grid
-                        container
-                        justify="center"
-                        direction="column"
-                        alignItems="center"
-                        spacing={5}
-                    >
-                        <Grid item>
-                            <Nav/>
-                        </Grid>
-                        <Grid item>
-                            <PlotDisplay/>
-                        </Grid>
-                        <Grid item>
-                            <TactileSection/>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Container>
-        </div>
+        <Grid
+            container
+            justify="center"
+            direction="column"
+            alignItems="center"
+            spacing={5}
+        >
+            <Grid item>
+                <Nav/>
+            </Grid>
+            <Grid item>
+                <DataCollector/>
+            </Grid>
+            <Grid item>
+                <DataPusher/>
+            </Grid>
+        </Grid>
     )
 }
 

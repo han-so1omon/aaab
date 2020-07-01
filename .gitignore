@@ -4,7 +4,10 @@ node_modules
 *.graphqls.d.ts
 
 .vercel
+vercel.json
 
 *.sw*
 
 *.env
+
+yarn-error.log
