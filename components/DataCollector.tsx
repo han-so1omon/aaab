@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-import Grid from '@material-ui/core/Grid'
 
 import { AppStateContext, AppDispatchContext } from './AppStateProvider'
 
@@ -8,7 +7,7 @@ const PlotDisplay = dynamic(import('../components/PlotDisplay'), {
     ssr: false
 })
 
-const DataCollector = (props) => {
+const DataCollector = () => {
     const dispatch = useContext(AppDispatchContext)
     const [datasets, setDatasets] = useState({})
     const {
@@ -16,7 +15,7 @@ const DataCollector = (props) => {
     } = useContext(AppStateContext)
 
     async function fetchValidationData(id: string) {
-        const resp = await fetch('http://localhost:3000/api/validate', {
+        const resp = await fetch(process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL + '/api/validate', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -54,22 +53,12 @@ const DataCollector = (props) => {
 
     useEffect(() => {
         if (testID) {
-            fetchValidationData(testID)
+            fetchValidationData(testID.id)
         }
     }, [testID])
 
     return (
-        <Grid
-            container
-            justify="center"
-            direction="column"
-            alignItems="center"
-            spacing={5}
-        >
-            <Grid item>
-                <PlotDisplay datasets={datasets}/>
-            </Grid>
-        </Grid>
+        <PlotDisplay datasets={datasets}/>
     )
 }
 

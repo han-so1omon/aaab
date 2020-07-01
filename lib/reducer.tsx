@@ -1,14 +1,24 @@
-export default function (state, { type, payload }) {
-    switch (type) {
+interface InState {
+    type: any
+    payload: any
+}
+
+export default function (state:any, inState:InState) {
+    switch (inState.type) {
+        case 'SET_LOG_MSG':
+            return {
+                ...state,
+                logMsg: inState.payload
+            }
         case 'SET_TEST_ID':
             return {
                 ...state,
-                testID: payload
+                testID: inState.payload
             }
         case 'SET_TEST_STATUS':
             return {
                 ...state,
-                testStatus: payload
+                testStatus: inState.payload
             }
         default:
             return state

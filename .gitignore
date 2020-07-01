@@ -9,5 +9,6 @@ vercel.json
 *.sw*
 
 *.env
+*.env*
 
 yarn-error.log

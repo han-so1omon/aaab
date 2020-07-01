@@ -1,5 +1,9 @@
 var state: {
-    testID: number | undefined,
+    logMsg: string | undefined,
+    testID: {
+        id: string,
+        name: string
+    } | undefined
     testStatus: {
         id: string,
         aName: string,
@@ -10,6 +14,7 @@ var state: {
         msg: string
     } | undefined
 } = {
+    logMsg: undefined,
     testID: undefined,
     testStatus: undefined
 }

@@ -1,10 +1,11 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Paper, Button } from '@material-ui/core'
 import { getRandomBoxMeuller, getRandomInt, getRandomArbitrary, getRandomID } from '../lib/sampler'
 
 import { AppDispatchContext} from './AppStateProvider'
 
 const TestInteraction = () => {
+    const [numTests, setNumTests] = useState(0)
     const dispatch = useContext(AppDispatchContext)
 
     function getRandomDatasetParams() {
@@ -41,6 +42,11 @@ const TestInteraction = () => {
     }
 
     async function generateSampleDatasets () {
+        dispatch({
+            type: 'SET_LOG_MSG',
+            payload: '----------\nStarting test ' + numTests + ' \n----------'
+        })
+        setNumTests(numTests+1)
         let data = randomData()
         /*
         let data = {
@@ -66,7 +72,7 @@ const TestInteraction = () => {
                 6.31, 2.58, 0.07, 5.76, 3.50]
         }
         */
-        const resp = await fetch('http://localhost:3000/api/test', {
+        const resp = await fetch(process.env.NEXT_PUBLIC_FUNCTIONS_BASE_URL + '/api/test', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -77,15 +83,15 @@ const TestInteraction = () => {
 
         dispatch({
             type: 'SET_TEST_ID',
-            payload: jResp.id
+            payload: { id: jResp.id, name: data.name }
         })
     }
 
     return (
         <Paper>
             <Button
-                variant="contained"
-                color="secondary"
+                variant='contained'
+                color='secondary'
                 onClick={() => { generateSampleDatasets() }}
             >
                 Generate sample datasets

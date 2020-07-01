@@ -4,23 +4,24 @@ import PropTypes from 'prop-types'
 import initState from '../lib/init-state'
 import reducer from '../lib/reducer'
 
-export const AppDispatchContext = createContext(() => { })
+export const AppDispatchContext = createContext((dispatch:any) => { dispatch =
+dispatch })
 export const AppStateContext = createContext(initState)
 
-function AppStateProvider({ children }) {
+function AppStateProvider(props:any) {
     const [state, dispatch] = useReducer(reducer, initState)
 
     return (
         <AppDispatchContext.Provider value={dispatch}>
             <AppStateContext.Provider value={state}>
-                {children}
+                {props.children}
             </AppStateContext.Provider>
         </AppDispatchContext.Provider>
     )
 }
 
 AppStateProvider.propTypes = {
-    children: PropTypes.any.isRequired,
+    children: PropTypes.any.isRequired
 }
 
 export default AppStateProvider
